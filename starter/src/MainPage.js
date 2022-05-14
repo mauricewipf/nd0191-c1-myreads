@@ -8,9 +8,9 @@ const MainPage = ({books}) => {
                 <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-                <BookShelf categoryname="Currently Reading" books={books}/>
-                <BookShelf categoryname="Want to Read" books={books}/>
-                <BookShelf categoryname="Read" books={books}/>
+                <BookShelf categoryname="Currently Reading" books={books.filter((book) => book.shelf === "currentlyReading")}/>
+                <BookShelf categoryname="Want to Read" books={books.filter((book) => book.shelf === "wantToRead")}/>
+                <BookShelf categoryname="Read" books={books.filter((book) => book.shelf === "read")}/>
             </div>
             <div className="open-search">
                 <Link to="/search">Add a book</Link>
