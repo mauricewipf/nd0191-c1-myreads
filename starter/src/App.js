@@ -20,10 +20,10 @@ function App() {
   return (
       <Routes>
         <Route exact path="/" element={
-          <MainPage />
+          <MainPage books={books} />
         }/>
         <Route path="/search" element={
-          <SearchPage />
+          <SearchPage books={books} />
         }/>
       </Routes>
   );
