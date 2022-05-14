@@ -1,11 +1,9 @@
 import "./App.css";
-import {useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import SearchPage from "./SearchPage";
 import MainPage from "./MainPage";
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
 
   return (
       <Routes>
