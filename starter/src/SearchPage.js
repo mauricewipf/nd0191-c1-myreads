@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import {search} from "./BooksAPI";
 
-const SearchPage = () => {
+const SearchPage = ({onUpdateShelf}) => {
 
     const [query, setQuery] = useState("");
     const [books, setBooks] = useState([]);
@@ -43,7 +43,7 @@ const SearchPage = () => {
                                         }}
                                     ></div>
                                     <div className="book-shelf-changer">
-                                        <select value="none" onChange={ (event) => {} }>
+                                        <select value="none" onChange={ (event) => onUpdateShelf(book, event) }>
                                             <option value="none" disabled>
                                                 Move to...
                                             </option>

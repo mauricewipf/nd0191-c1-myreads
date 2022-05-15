@@ -13,6 +13,11 @@ function App() {
         const newShelf = event.target.value;
         update(book, newShelf);
 
+        // Add new book
+        if(books.find((b) => b.id === book.id) === undefined) {
+            books.push(book);
+        }
+
         const newBooks = books.map((b) => {
             if (b.id === book.id) {
                 return {...b, shelf: newShelf}
@@ -37,7 +42,7 @@ function App() {
           <MainPage books={books} onUpdateShelf={updateShelf} />
         }/>
         <Route path="/search" element={
-          <SearchPage books={books} />
+          <SearchPage books={books} onUpdateShelf={updateShelf} />
         }/>
       </Routes>
   );
