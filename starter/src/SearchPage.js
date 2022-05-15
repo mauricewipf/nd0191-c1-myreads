@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import {search} from "./BooksAPI";
 
-const SearchPage = ({onUpdateShelf}) => {
+const SearchPage = ({currentBooks, onUpdateShelf}) => {
 
     const [query, setQuery] = useState("");
     const [books, setBooks] = useState([]);
@@ -12,7 +12,19 @@ const SearchPage = ({onUpdateShelf}) => {
         const results = query.length > 0
             ? await search(query, 100)
             : [];
-        setBooks(Array.isArray(results) ? results : []);
+
+        const foundBooks = Array.isArray(results) ? results : [];
+
+        const booksWithShelf = foundBooks.map((book) => {
+            const currentBook = currentBooks.find((currentBook) => currentBook.id === book.id);
+            if (!!currentBook) {
+                return currentBook;
+            } else {
+                return {...book, shelf: "none"};
+            }
+        })
+
+        setBooks(booksWithShelf);
     };
 
     return (
@@ -43,8 +55,8 @@ const SearchPage = ({onUpdateShelf}) => {
                                         }}
                                     ></div>
                                     <div className="book-shelf-changer">
-                                        <select value="none" onChange={ (event) => onUpdateShelf(book, event) }>
-                                            <option value="none" disabled>
+                                        <select value={book.shelf} onChange={ (event) => onUpdateShelf(book, event) }>
+                                            <option value="disabled" disabled>
                                                 Move to...
                                             </option>
                                             <option value="currentlyReading">

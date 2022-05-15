@@ -42,7 +42,7 @@ function App() {
           <MainPage books={books} onUpdateShelf={updateShelf} />
         }/>
         <Route path="/search" element={
-          <SearchPage books={books} onUpdateShelf={updateShelf} />
+          <SearchPage currentBooks={books} onUpdateShelf={updateShelf} />
         }/>
       </Routes>
   );
